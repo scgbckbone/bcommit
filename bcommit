@@ -1,0 +1,10 @@
+#!/bin/bash
+
+COMMIT_MSG=$1
+[[ -z "$COMMIT_MSG" ]] && echo "ERROR: no commit msg" && exit 1
+
+CURR_BRANCH="$(git rev-parse --abbrev-ref HEAD)" || exit 1
+
+echo "commit msg: $CURR_BRANCH $COMMIT_MSG"
+
+git commit -m "$CURR_BRANCH $COMMIT_MSG"
