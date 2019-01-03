@@ -1,7 +1,11 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 COMMIT_MSG=$1
 [[ -z "$COMMIT_MSG" ]] && echo "ERROR: no commit msg" && exit 1
+
+ADD_ALL=$2
+[[ ! -z "$ADD_ALL" ]] && git add . 
+PUSH=$3
 
 CURR_BRANCH="$(git rev-parse --abbrev-ref HEAD)" || exit 1
 
@@ -9,4 +13,5 @@ echo "commit msg: $CURR_BRANCH $COMMIT_MSG"
 
 git commit -m "$CURR_BRANCH $COMMIT_MSG"
 
+[[ ! -z "$PUSH" ]] && git push 
 echo "done"
